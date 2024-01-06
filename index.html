@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Basic Page Needs -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
@@ -8,17 +9,24 @@
     <title>Document</title>
 </head>
 <body>
+<!-- Error message display area -->
 <div id="error"></div>
+
+<!-- Main content container -->
 <div class="main">
+    <!-- Gender prediction form section -->
     <section class="container left">
         <form id="form">
+            <!-- Form title -->
             <header>
                 <h1>Mr. or Ms. ?</h1>
             </header>
+            <!-- Name input field -->
             <article class="input-name">
                 <label for="name">Name</label>
                 <input id="name" type="text">
             </article>
+            <!-- Radio button group for gender selection -->
             <section class="radio-group">
                 <div class="radio-item">
                     <input id="option-male" type="radio" name="radio-group" value="male">
@@ -29,16 +37,20 @@
                     <label for="option-female">Female</label>
                 </div>
             </section>
+            <!-- Form submission buttons -->
             <footer class="button-group">
                 <button id="submit" class="btn" type="submit">Submit</button>
                 <button id="save" class="btn" type="button">Save</button>
             </footer>
         </form>
     </section>
+
+    <!-- Prediction result display section -->
     <section class="prediction">
         <h1>Prediction</h1>
         <p id="gender-txt">GENDER</p>
         <p id="gender-val">Probability</p>
+        <!-- Saved answer display area -->
         <div class="saved-answer-area">
             <p id="saved-answer">Saved Answer</p>
             <button id="clear" class="btn">Clear</button>

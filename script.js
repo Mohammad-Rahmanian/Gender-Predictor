@@ -1,10 +1,15 @@
+// API endpoint for gender prediction
 const API_URL = "https://api.genderize.io/?name=";
 
+// Execute when the document is fully loaded
 document.addEventListener("DOMContentLoaded", () => {
+    // Initialize form values
     let formValues = { name: "", gender: undefined };
-    let lastName = "";
+    let firstName = "";
 
+    // Function to simplify element selection
     const getEl = (selector) => document.querySelector(selector);
+
     const nameInput = getEl("#name");
     const form = getEl("#form");
     const saveButton = getEl("#save");
@@ -14,37 +19,36 @@ document.addEventListener("DOMContentLoaded", () => {
     const clearButton = getEl("#clear");
     const error = getEl("#error");
 
+    // Function to display error messages
     const updateError = (message, display = "flex") => {
         error.style.display = display;
         error.innerHTML = message;
     };
 
+    // Event listeners for form inputs
     nameInput.addEventListener("input", e => formValues.name = e.target.value);
     form.addEventListener("input", () => {
         formValues.gender = getEl('input[name="radio-group"]:checked')?.value;
     });
 
+    // Handle form submission
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        lastName = formValues.name.trim();
-        if (lastName.length > 255) {
-            return updateError("Name cannot exceed 255 characters");
-        }
-        if (!/^[A-Za-z\s]+$/.test(lastName)) {
-            return updateError("Name must contain only spaces, uppercase, and lowercase letters");
-        }
-        if (!lastName) return updateError("Complete the form");
 
+        // Validate input name
+        firstName = formValues.name.trim();
+        if (firstName.length > 255) return updateError("Name cannot exceed 255 characters");
+        if (!/^[A-Za-z\s]+$/.test(firstName)) return updateError("Name must contain only spaces, uppercase, and lowercase letters");
+        if (!firstName) return updateError("Complete the form");
+
+        // API request and response handling
         updateError("", "none");
-        savedAnswer.textContent = localStorage.getItem(lastName) || "NO DATA";
+        savedAnswer.textContent = localStorage.getItem(firstName) || "NO DATA";
         genderText.textContent = genderValue.textContent = "loading...";
-
         try {
-            const response = await fetch(`${API_URL}${lastName}`);
+            const response = await fetch(`${API_URL}${firstName}`);
             const data = await response.json();
-            if (data.probability === 0) {
-                throw new Error(lastName + " name not found");
-            }
+            if (data.probability === 0) throw new Error(firstName + " name not found");
             genderText.textContent = data.gender;
             genderValue.textContent = `${data.probability}`;
         } catch (err) {
@@ -54,10 +58,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    // Save button functionality
     saveButton.addEventListener("click", () => {
         if (formValues.gender && formValues.name) {
             updateError("", "none");
-            lastName = formValues.name;
+            firstName = formValues.name;
             localStorage.setItem(formValues.name, formValues.gender);
             savedAnswer.textContent = localStorage.getItem(formValues.name) || "NO DATA";
         } else {
@@ -65,10 +70,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    // Clear button functionality
     clearButton.addEventListener("click", () => {
-        if (localStorage.getItem(lastName)) {
-            localStorage.removeItem(lastName);
-            lastName = "";
+        if (localStorage.getItem(firstName)) {
+            localStorage.removeItem(firstName);
+            firstName = "";
             savedAnswer.textContent = "CLEARED";
         }
     });
