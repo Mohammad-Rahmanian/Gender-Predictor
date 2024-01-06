@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" type="text/javascript"></script>
+    <title>Document</title>
+</head>
+<body>
+<div id="error"></div>
+<div class="main">
+    <section class="container left">
+        <form id="form">
+            <header>
+                <h1>Mr. or Ms. ?</h1>
+            </header>
+            <article class="input-name">
+                <label for="name">Name</label>
+                <input id="name" type="text">
+            </article>
+            <section class="radio-group">
+                <div class="radio-item">
+                    <input id="option-male" type="radio" name="radio-group" value="male">
+                    <label for="option-male">Male</label>
+                </div>
+                <div class="radio-item">
+                    <input id="option-female" type="radio" name="radio-group" value="female">
+                    <label for="option-female">Female</label>
+                </div>
+            </section>
+            <footer class="button-group">
+                <button id="submit" class="btn" type="submit">Submit</button>
+                <button id="save" class="btn" type="button">Save</button>
+            </footer>
+        </form>
+    </section>
+    <section class="prediction">
+        <h1>Prediction</h1>
+        <p id="gender-txt">GENDER</p>
+        <p id="gender-val">Probability</p>
+        <div class="saved-answer-area">
+            <p id="saved-answer">Saved Answer</p>
+            <button id="clear" class="btn">Clear</button>
+        </div>
+    </section>
+</div>
+</body>
+</html>

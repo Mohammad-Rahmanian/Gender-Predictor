@@ -1,0 +1,112 @@
+/* Enhanced Body Styles: Flex container with centered content and a fixed background image */
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-image: url(image.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    margin: 0;
+    color: #f4f4f4; /* Light text color for contrast */
+    font-family: 'Helvetica Neue', sans-serif; /* Modern font */
+    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for text readability */
+    background-blend-mode: darken; /* Blends the background image with the color */
+}
+
+/* Enhanced Main Container: Responsive design with glass effect */
+.main {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 30px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.25); /* Adjusted transparency for glass effect */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.2);
+    margin: 40px 0;
+}
+
+/* Styles for the Name Label and Input Field Container */
+.input-name {
+    display: flex;
+    align-items: center; /* Align items vertically in the center */
+    gap: 15px; /* Space between the label and the input field */
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/* Label within .input-name */
+.input-name p {
+    margin: 0; /* Remove margin to align closely with the input field */
+    white-space: nowrap; /* Prevents the label from wrapping */
+}
+
+/* Further Reduced Height for Text Input Field */
+.input-name input[type="text"] {
+    padding: 4px 8px; /* Add padding for spacing between text and field borders */
+    font-size: 14px; /* Keep font size consistent */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    line-height: normal; /* Default line height */
+    height: 30px; /* Maintain a fixed height */
+    box-sizing: border-box; /* Include padding and border in the height calculation */
+}
+/* Button Group Styles: Aligned with responsive wrapping */
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Interactive Button Styles: Attractive and responsive */
+.btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #4caf50;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+/* Saved Answer Area: Full-width with structured design */
+.saved-answer-area {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Error Message Styles: Enhanced visibility and layout */
+#error {
+    display: none;
+    background-color: #ffdddd;
+    color: #a94442;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+    width: 20%;
+    box-sizing: border-box;
+}
+
+/* Positioning "Mr. or Ms.?" higher */
+.container.left h1 {
+    margin-top: 0;
+    margin-bottom: 30px; /* Increased space below the title */
+}
+
+/* Adding space between the "Male" and "Female" radio buttons */
+.radio-item {
+    margin-bottom: 15px; /* Space below each radio item, adjust as needed */
+}
