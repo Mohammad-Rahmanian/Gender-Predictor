@@ -1,7 +1,6 @@
-// API endpoint for gender prediction
+// API for gender prediction
 const API_URL = "https://api.genderize.io/?name=";
 
-// Execute when the document is fully loaded
 document.addEventListener("DOMContentLoaded", () => {
     // Initialize form values
     let formValues = { name: "", gender: undefined };
@@ -13,8 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const nameInput = getEl("#name");
     const form = getEl("#form");
     const saveButton = getEl("#save");
-    const genderText = getEl("#gender-txt");
-    const genderValue = getEl("#gender-val");
+    const genderText = getEl("#gender-text");
+    const genderValue = getEl("#gender-variable");
     const savedAnswer = getEl("#saved-answer");
     const clearButton = getEl("#clear");
     const error = getEl("#error");
@@ -38,8 +37,8 @@ document.addEventListener("DOMContentLoaded", () => {
         // Validate input name
         firstName = formValues.name.trim();
         if (firstName.length > 255) return updateError("Name cannot exceed 255 characters");
-        if (!/^[A-Za-z\s]+$/.test(firstName)) return updateError("Name must contain only spaces, uppercase, and lowercase letters");
-        if (!firstName) return updateError("Complete the form");
+        if (!/^[A-Za-z\s]+$/.test(firstName)) return updateError("Name must contain only spaces and letters");
+        if (!firstName) return updateError("Please enter a name");
 
         // API request and response handling
         updateError("", "none");
@@ -48,12 +47,12 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             const response = await fetch(`${API_URL}${firstName}`);
             const data = await response.json();
-            if (data.probability === 0) throw new Error(firstName + " name not found");
+            if (data.probability === 0) throw new Error(firstName + " not found");
             genderText.textContent = data.gender;
             genderValue.textContent = `${data.probability}`;
         } catch (err) {
             updateError(err.message);
-            genderText.textContent = "GENDER";
+            genderText.textContent = "Gender";
             genderValue.textContent = "Probability";
         }
     });
@@ -64,9 +63,11 @@ document.addEventListener("DOMContentLoaded", () => {
             updateError("", "none");
             firstName = formValues.name;
             localStorage.setItem(formValues.name, formValues.gender);
-            savedAnswer.textContent = localStorage.getItem(formValues.name) || "NO DATA";
+            savedAnswer.textContent = localStorage.getItem(formValues.name) || "No Data";
+        } else if(!formValues.name) {
+            updateError("Please enter a name");
         } else {
-            updateError("Complete the form");
+            updateError("Enter 'male' or 'female' for gender");
         }
     });
 
@@ -75,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (localStorage.getItem(firstName)) {
             localStorage.removeItem(firstName);
             firstName = "";
-            savedAnswer.textContent = "CLEARED";
+            savedAnswer.textContent = "Clear";
         }
     });
 });
